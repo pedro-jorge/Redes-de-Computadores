@@ -49,6 +49,8 @@ class ClientTCP(Client):
         self.sock = socket(AF_INET, SOCK_STREAM)
         self.sock.connect((self.HOST, self.PORT))
 
+        print(f'Cliente rodando na porta {port}')
+
     def send_message(self, text: str) -> bool:
         try:
             self.sock.connect((self.HOST, self.PORT))

@@ -15,6 +15,7 @@ def print_and_get_input() -> str:
     return text
 
 def start_client_udp(port: int, host: str='localhost'):
+    #port = 1711
     client = ClientUDP(host, port)
     print(client)
 
@@ -35,6 +36,7 @@ def start_client_udp(port: int, host: str='localhost'):
 
 
 def start_server_udp(port: int, host: str='localhost'):
+    #port = 1711
     print('Iniciando servidor UDP...')
     server = ServerUDP(host, port)
     print(server)
@@ -62,6 +64,7 @@ def start_client_tcp(port: int, host: str='localhost'):
 
 
 def start_server_tcp(port: int, host: str='localhost'):
+    port = 1710
     print('Iniciando servidor TCP...')
     server = ServerTCP(host, port)
     print(server)

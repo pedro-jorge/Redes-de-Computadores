@@ -61,6 +61,8 @@ class ServerTCP(Server):
         self.MAX_BYTES = 1024
         self.sock = socket(AF_INET, SOCK_STREAM)
 
+        print(f'Servidor rodando na porta {port}')
+
         self.sock.bind((host, port))
         self.sock.listen(5)
         self.start_listening()
