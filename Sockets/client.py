@@ -59,5 +59,3 @@ class ClientTCP(Client):
         self.sock.close()
     def __str__(self) -> str:
         return f'TCP Client assigned to {self.sock.getsockname()}'
-
-
