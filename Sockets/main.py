@@ -42,10 +42,10 @@ def start_server_udp(port: int, host: str='localhost'):
 
 
 def start_client_tcp(port: int, host: str='localhost'):
-    client = ClientTCP(host, port)
-    print(client)
+    #print(client)
 
     while True:
+        client = ClientTCP(host, port)
         text = print_and_get_input()
 
         if text == 'close':
@@ -58,7 +58,8 @@ def start_client_tcp(port: int, host: str='localhost'):
         else:
             print(f'A palavra não foi encontrada no dicionário.')
 
-    client.close()
+        client.close()
+
 
 def start_server_tcp(port: int, host: str='localhost'):
     print('Iniciando servidor TCP...')
@@ -76,7 +77,7 @@ if __name__ == '__main__':
         'server_tcp': start_server_tcp
     }
     parser.add_argument('function', choices=choices, help='Either to start a client or a server.')
-    parser.add_argument('--port', type=int, default=3333, help='Which port to use, default=1710.')
+    parser.add_argument('--port', type=int, default=1710, help='Which port to use, default=1710.')
     args = parser.parse_args()
 
     function = choices[args.function]

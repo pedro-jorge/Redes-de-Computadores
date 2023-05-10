@@ -1,6 +1,7 @@
 import abc
 from socket import *
 
+
 class Server:
     def __init__(self, host: str, port: int):
         self.HOST = host
@@ -61,7 +62,7 @@ class ServerTCP(Server):
         self.sock = socket(AF_INET, SOCK_STREAM)
 
         self.sock.bind((host, port))
-        self.sock.listen(1)
+        self.sock.listen(5)
         self.start_listening()
 
     def start_listening(self):
@@ -70,7 +71,7 @@ class ServerTCP(Server):
             text_bytes = conn.recv(self.MAX_BYTES)
             text = text_bytes.decode()
             translated_text = self.translate(text)
-            conn.send(translated_text.encode())
+            conn.sendall(translated_text.encode())
             conn.close()
 
     def __str__(self) -> str:

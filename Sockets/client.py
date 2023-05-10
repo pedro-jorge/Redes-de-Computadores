@@ -1,11 +1,12 @@
 import abc
 from socket import *
 
+
 class Client:
     def __init__(self, host: str, port: int):
         self.HOST = host
         self.PORT = port
-        self.MAX_BYTES = 2048
+        self.MAX_BYTES = 1024
 
     @abc.abstractmethod
     def send_message(self, text: str) -> bool:
@@ -46,16 +47,24 @@ class ClientTCP(Client):
     def __init__(self, host: str, port: int):
         super().__init__(host, port)
         self.sock = socket(AF_INET, SOCK_STREAM)
-        self.sock.connect((host, port))
+        self.sock.connect((self.HOST, self.PORT))
 
     def send_message(self, text: str) -> bool:
-        #self.sock.connect((self.HOST, self.PORT))
-        self.sock.send(text.encode())
+        try:
+            self.sock.connect((self.HOST, self.PORT))
+        except:
+            pass
+
+        self.sock.sendall(text.encode())
+        return True
+
+    @abc.abstractmethod
+    def receive_message(self) -> str:
         translated_word = self.sock.recv(self.MAX_BYTES)
-        #self.sock.close()
-        return translated_word
+        return translated_word.decode()
 
     def close(self):
         self.sock.close()
+
     def __str__(self) -> str:
         return f'TCP Client assigned to {self.sock.getsockname()}'
